@@ -1,0 +1,147 @@
+\documentclass[12pt]{sprawozdanie}
+\usepackage{color}
+\usepackage{tabularray}
+\usepackage{tikz}
+\usepackage{polski}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{multicol}
+\usepackage{booktabs}
+
+\usepackage{lipsum}
+\usepackage[T1]{fontenc}
+% package to open file containing variables
+\usepackage{datatool, filecontents}
+\DTLsetseparator{,}% Set the separator between the columns.
+
+% import data
+\DTLloaddb[noheader, keys={thekey,thevalue}]{mydata}{../../database/plane_properties.csv}
+% Loads mydata.dat with column headers 'thekey' and 'thevalue'
+\newcommand{\PlaneVar}[1]{\DTLfetch{mydata}{thekey}{#1}{thevalue}}
+
+
+
+
+\setlength{\headheight}{14.49998pt}
+\addtolength{\topmargin}{-2.49998pt}
+
+\title{„Równowaga podłużna samolotu i siły na sterownicy wysokości”}
+\author{Marek Polewski}
+\class{Mechanika Lotu 2}
+\instructor{dr. inż Maciej Lasek}
+\projectName{Projekt 9}
+\facultyName{Wydział Mechaniczny Energetyki i Lotnictwa Politechniki Warszawskiej - Zakład Mechaniki}
+
+\renewcommand\figurename{Rys.}%skrocony podpis
+\renewcommand\tablename{Tab.}
+
+
+\begin{document}
+
+\maketitle
+
+\leavevmode\thispagestyle{empty}
+\newpage
+
+
+\tableofcontents
+
+\FloatBarrier
+\setcounter{page}{1}
+
+
+% \section{Samochodzik}
+
+% Zamiast wciągać kresli wole głaskać pieski
+
+% \begin{figure}[h!]
+%     \centering
+%     \includegraphics[width = 0.4\linewidth]{imgs/burek.jpg}
+%     \caption{Burek.jpg}
+%     \label{fig:burek}
+% \end{figure}
+% \FloatBarrier
+
+
+\section{Wstęp}
+Celem projektu jest wyznaczenie kątów wychylenia usterzenia poziomego samolotu koniecznych do zachowania równowangi oraz wyznaczenia siły na drążku.
+Obliczenia zostały wykonane w Pythonie. \\
+Wysokość przyjęta do obliczeń to $h=3000 m$. Gęstość jej odpowiadająca wynosi $\rho = 0.908 kgm^{-3}$.  \\
+Dane z poprzednich projektów:
+\begin{itemize}
+    \item powierzchnia skrzydeł $S = \PlaneVar{S} m^2$,
+    \item powierzchnia usterzenia poziomego $S_h = \PlaneVar{S_h} m^2$,
+    \item $\Big(\frac{V_{H\infty}}{V_{\infty}}\Big)^2 = 0.85 $,
+\end{itemize}
+
+Do obliczeń zostały wykorzystane wartości środków ciężkości wyliczone \cite{Proj8}
+
+
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{lr} 
+    \toprule
+                & \multicolumn{1}{l}{$\bar x_c [-] $}  \\ \hline
+    $\bar x_c_1$ & \PlaneVar{bx_c1}                                \\ \hline
+    $\bar x_c_2$ & \PlaneVar{bx_c2}                                \\ \hline
+    $\bar x_c_3$ & \PlaneVar{bx_c3}                                \\ 
+    \bottomrule
+    \end{tabular}
+    \label{tab:srodki}
+    \caption{Położenia środka ciężkości samolotu}
+\end{table}
+\FloatBarrier
+
+\section{Współczynnik momentu podłużnego usterzenia wysokości}
+\subsection{Cecha objętościowa usterzenia poziomego}
+
+Wzór na cechę usterzenia:
+
+\begin{equation}
+    \kappa'_{h} =  (\bar{x}_{SA_H}-\bar{x}_c)\cdot \frac{S_H}{S} \cdot \Big(\frac{V_{H\infty}}{V_{\infty}}\Big)^2
+\end{equation}
+, gdzie $\bar{x}_{SA_H} =\PlaneVar{bx_sah}$.  
+Na podstawie powyższego wzoru uzyskałem:
+
+\begin{table}[h!]
+    \centering
+    
+    \begin{tabular}{rr} 
+    \toprule
+    \multicolumn{1}{l}{$\bar x_{i}$} & \multicolumn{1}{l}{$\kappa'_{Hi}$}  \\ \hline
+    \PlaneVar{bx_c1}                             & \PlaneVar{kappa_c1}                               \\ \hline
+    \PlaneVar{bx_c2}                             & \PlaneVar{kappa_c2}                               \\ \hline
+    \PlaneVar{bx_c3}                             & \PlaneVar{kappa_c3}                               \\
+    \bottomrule
+    \end{tabular}
+    \caption{Cecha objętościowa usterzenia poziomego}
+    \label{tab:kappa}
+    \end{table}
+\FloatBarrier
+
+\subsection{Współczynnik siły nośnej usterzenia poziomego}
+Współczynnik siły nośnej usterzenia poziomego wyrażam
+
+\begin{equation*}
+    C_z_H = a_1 \alpaha_H + a_2 \delta_H + a_3 \delta_H_k
+\end{equation*}
+
+\begin{itemize}
+    \item procetowa grubość profilu $10 \% $,
+    \item położenie szczeliny w stosunku do średniej cięciwy płata stabilizatora $0.428$,
+    \item wydłużenie efektywne usterzenia poziomego 
+    \item odwrotność zbierzności usterzenia poziomego
+\end{itemize}
+
+
+
+% \begin{thebibliography}{9}
+%     \bibitem{Proj8}
+%     Projekt 8 - Moment podłużny samolotu, Marek Polewski październik 2023
+% \end{thebibliography}
+
+
+\bibliographystyle{plain} % We choose the "plain" reference style
+\bibliography{refs} % Entries are in the refs.bib file
+
+\end{document}
