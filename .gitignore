@@ -2,7 +2,7 @@
 *.jpg
 *.pdf
 *.txt
-.vscode/
+
 
 ~$ml_projekty.xlsx
 # latex relatex files
