@@ -1,10 +1,10 @@
-# BIPOL Projects with my database
+# Flight Mechanics projects with my database
 
 Goal is to design plane in a neat way with updated database with version control.
 
 ## Usage tips
 
-All updated engineering values should be stored in `sheet_name="Base"` in `BIPOL.xlsx`.
+All updated engineering values should be stored in `sheet_name="Base"` in `ml_projekty.xlsx`.
 
 ### To get value from `Base` sheet:
 
@@ -13,7 +13,7 @@ import pandas as pd
 
 # Import database from excel sheet. It is organized in columns [variable | unit | symbol | value]
 # You can set index col (you can take symbol for cleaner formulas)
-df = pd.read_excel("../../database/BIPOL.xlsx", sheet_name="Base", index_col="symbol")
+df = pd.read_excel("../../database/ml_projekty.xlsx", sheet_name="Base", index_col="symbol")
 
 # to get value us df.at[<index>, "value"]
 df.at["w_e","value"]
