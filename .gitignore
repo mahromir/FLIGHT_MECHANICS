@@ -3,3 +3,18 @@
 *.pdf
 *.txt
 .vscode/
+
+~$ml_projekty.xlsx
+# latex relatex files
+latex_raport/
+base_files/
+*.aux
+*.fdb_latexmk
+*.fls 
+*.log
+*.gz
+*.bbl
+*.out
+*.toc
+*.blg
+*.cls
