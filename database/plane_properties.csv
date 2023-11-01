@@ -1,5 +1,20 @@
+Variable,Value
+Basic,
 S,15
+b,9.94
 ca,1.5
+C_a,1.5
+Lambda,6.59
+v_cruise,54.4
+mtow,726
+,
+Proj2,
+Lambda,6.59
+a,4.452
+,
+,
+,
+Projekt 3,
 l_k,7.29
 l_nk,1.61
 v_inf,54.44
@@ -9,3 +24,33 @@ l_h,5.09
 c_m.sa,-0.0480
 k'_h,0.423
 C_m0k,-0.0024
+(V_h.inf/v_inf)^2,0.85
+,
+,
+,
+,
+,
+Projekt 8 środek ciężkości samolotu,
+bx_c1,0.12
+bx_c2,0.25
+bx_c3,0.38
+,
+Projekt 9 ,
+bx_sah,2.86
+,
+kappa_c1,0.34
+kappa_c2,0.33
+kappa_c3,0.31
+,
+b_h,3.01
+s_h,2.2
+c_h1,0.73
+c_h2,1.09
+1/lambda_h,0.666
+Lambda_h,4.118
+,
+SsH,0.934
+SsH/S_h,0.425
+a1,3.1
+a2,2.218
+deps_dalpha,0.430

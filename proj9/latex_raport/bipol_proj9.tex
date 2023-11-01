@@ -73,8 +73,9 @@ Dane z poprzednich projektów:
     \item $\Big(\frac{V_{H\infty}}{V_{\infty}}\Big)^2 = 0.85 $,
 \end{itemize}
 
-Do obliczeń zostały wykorzystane wartości środków ciężkości wyliczone \cite{Proj8}
 
+% TODO FIX citation
+Do obliczeń zostały wykorzystane wartości środków ciężkości wyliczone \cite{Proj8}
 
 
 \begin{table}[h!]
@@ -100,7 +101,7 @@ Wzór na cechę usterzenia:
 \begin{equation}
     \kappa'_{h} =  (\bar{x}_{SA_H}-\bar{x}_c)\cdot \frac{S_H}{S} \cdot \Big(\frac{V_{H\infty}}{V_{\infty}}\Big)^2
 \end{equation}
-, gdzie $\bar{x}_{SA_H} =\PlaneVar{bx_sah}$.  
+, gdzie $\bar{x}_{SA_H} =\PlaneVar{bx_sah}$.  \\
 Na podstawie powyższego wzoru uzyskałem:
 
 \begin{table}[h!]
@@ -123,22 +124,92 @@ Na podstawie powyższego wzoru uzyskałem:
 Współczynnik siły nośnej usterzenia poziomego wyrażam
 
 \begin{equation*}
-    C_z_H = a_1 \alpaha_H + a_2 \delta_H + a_3 \delta_H_k
+    C_{z_H} = a_1 \alpha_H + a_2 \delta_H + a_3 \delta_{H_k}
 \end{equation*}
 
+
 \begin{itemize}
-    \item procetowa grubość profilu $10 \% $,
-    \item położenie szczeliny w stosunku do średniej cięciwy płata stabilizatora $0.428$,
-    \item wydłużenie efektywne usterzenia poziomego 
-    \item odwrotność zbierzności usterzenia poziomego
+    \item procetowa grubość profilu: $10 \% $,
+    \item położenie szczeliny w stosunku do średniej cięciwy płata stabilizatora $0.428\% $,
+    \item wydłużenie efektywne usterzenia poziomego: $\Lambda_H = \PlaneVar{Lambda_h}$ 
+    \item odwrotność zbierzności usterzenia poziomego: $\frac{1}{\lambda_H} = \PlaneVar{1/lambda_h}$
 \end{itemize}
 
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width = 0.8\linewidth]{imgs/dcz_da_h.jpg}
+    \caption{Odczyt charakterystyki $a_1 = \frac{dC_z}{d \alpha}$ dla usterzenia poziomego}
+    \label{fig:dczdah}
+\end{figure}
+\FloatBarrier
+
+Wyznaczanie współcznnika $a_2$
+
+\begin{equation*}
+    a_2 = 1.27 \cdot a_1 \cdot \sqrt{\frac{S_{sH}}{S_H}} \Big( 1- 0.2 \cdot \frac{S_{sH}}{S_H} \Big)
+\end{equation*}
+
+gdzie $\frac{S_{sH}}{S_H} = \frac{\PlaneVar{SsH}}{\PlaneVar{S_h}} = \PlaneVar{SsH/S_h}$ to stosunek powierzchni steru (\ref{fig:SsH} w \ref{appendix:obl}) do powierzchni usterzenia. 
+   
+\begin{equation} 
+    a_2 = 1.27 \cdot \PlaneVar{a1} \cdot \sqrt{\PlaneVar{SsH/S_h}}\Big( 1- 0.2 \cdot \PlaneVar{SsH/S_h} \Big) = \PlaneVar{a2} rad^{-1}
+\end{equation}
+
+\section{Kąt zaklinowania usterzenia wysokości}
+Obliczenia przyjmę dla prędkości przelotowej równej $V= 106kt = 54.4 m/s$ oraz wysokości $h = 0 m$. Przy tej prędkości płat będzie musiał wytworzyć współczynnik $C_z$ o pewnej wartości. 
+
+\begin{equation}
+    C_z = \frac{2mg}{\rho S V^2} = \frac{2 \cdot \PlaneVar{mtow} \cdot 9.81 }{1.225 \cdot \PlaneVar{S} \cdot \PlaneVar{v_cruise}^2} = 0.262
+\end{equation}
+    
+Równanie kąta zaklinowania łopaty:
+
+\begin{equation*}
+    \alpha _{zH} = \frac{C_{mbu}}{\kappa'_{H}\cdot a_1}-\frac{C_z}{a}\cdot \Big( 1- \frac{\partial \varepsilon}{\partial \alpha}  \Big)
+\end{equation*}
+
+gdzie
+
+\begin{equation}
+    \frac{\partial \varepsilon}{\partial \alpha} = \frac{2a}{\pi \Lambda} = \frac{2 \cdot \PlaneVar{a}}{\pi \cdot \PlaneVar{Lambda}} = \PlaneVar{deps_dalpha}
+\end{equation}
+
+
+% \usepackage{tabularray}
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{rrrrr} 
+    \toprule
+    \multicolumn{1}{l}{$\bar{x}_c$} & \multicolumn{1}{l}{$C_{mbu}$} & \multicolumn{1}{l}{$\kappa'_H$} & \multicolumn{1}{l}{$\alpha_{zH} [rad]$} & \multicolumn{1}{l}{\begin{tabular}[c]{@{}l@{}}$\alpha_{zH} [deg]$\\\end{tabular}}  \\ 
+    \hline
+    0.12                            & -0.074                      & 0.34                            & -0.10                                & -5.95                                                                           \\ 
+    \hline
+    0.25                            & -0.039                     & 0.32                        & -0.07                                & -4.16                                                                           \\ 
+    \hline
+    0.38                            & -0.004                      & 0.31                        & -0.03                                & -2.17                                                                           \\
+    \bottomrule
+    \end{tabular}
+    \caption{Wyznaczanie $\alpha_{zH}$  - kąta zaklinowania płata}
+    \label{tab:azh}
+    \end{table}
+\FloatBarrier
 
 
 % \begin{thebibliography}{9}
 %     \bibitem{Proj8}
 %     Projekt 8 - Moment podłużny samolotu, Marek Polewski październik 2023
 % \end{thebibliography}
+
+\appendix
+\chapter{Obliczenia powierzchni steru}\label{appendix:obl}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width = 0.5\linewidth]{imgs/Obliczenia_sh.jpg}
+    \caption{Obliczanie pola $S_{sH}$ z wysunku z Projektu 1 \cite{Proj1}}
+    \label{fig:SsH}
+\end{figure}
+\FloatBarrier
+
 
 
 \bibliographystyle{plain} % We choose the "plain" reference style

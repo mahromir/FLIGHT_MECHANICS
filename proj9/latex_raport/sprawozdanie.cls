@@ -1,7 +1,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{sprawozdanie}
 
-\LoadClass[12pt, twoside]{article}
+\LoadClass[12pt, twoside]{book}
 \RequirePackage{lmodern}
 \RequirePackage{amsmath}
 \RequirePackage[T1]{fontenc}
@@ -76,8 +76,8 @@
         \begin{flushright}
             \textsc{\Large \@author}\\ [0.1cm]
             \textsc{\Large \@class}\\ [0.1cm]
-            \textsc{\Large Prowadzący: \@intstructor}\\[0.1cm]
-            \textsc{\Large Grupa 1, środa 8:15-9:00}\\[0.1cm]
+            \textsc{\Large \@instructor}\\[0.1cm]
+            \textsc{\Large wtorek 14:15-16:00}\\[0.1cm]
         
         \end{flushright}
         
