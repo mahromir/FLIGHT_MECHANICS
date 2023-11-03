@@ -82,9 +82,9 @@ Do obliczeń zostały wykorzystane wartości środków ciężkości wyliczone \c
     \centering
     \begin{tabular}{lr} 
     \toprule
-                & \multicolumn{1}{l}{$\bar x_c [-] $}  \\ \hline
-    $\bar x_c_1$ & \PlaneVar{bx_c1}                                \\ \hline
-    $\bar x_c_2$ & \PlaneVar{bx_c2}                                \\ \hline
+                & \multicolumn{1}{l}{$\bar x_c [-] $}  \\ 
+    $\bar x_c_1$ & \PlaneVar{bx_c1}                                \\ 
+    $\bar x_c_2$ & \PlaneVar{bx_c2}                                \\ 
     $\bar x_c_3$ & \PlaneVar{bx_c3}                                \\ 
     \bottomrule
     \end{tabular}
@@ -110,8 +110,8 @@ Na podstawie powyższego wzoru uzyskałem:
     \begin{tabular}{rr} 
     \toprule
     \multicolumn{1}{l}{$\bar x_{i}$} & \multicolumn{1}{l}{$\kappa'_{Hi}$}  \\ \hline
-    \PlaneVar{bx_c1}                             & \PlaneVar{kappa_c1}                               \\ \hline
-    \PlaneVar{bx_c2}                             & \PlaneVar{kappa_c2}                               \\ \hline
+    \PlaneVar{bx_c2}                             & \PlaneVar{kappa_c2}                               \\ 
+    \PlaneVar{bx_c1}                             & \PlaneVar{kappa_c1}                               \\ 
     \PlaneVar{bx_c3}                             & \PlaneVar{kappa_c3}                               \\
     \bottomrule
     \end{tabular}
@@ -149,10 +149,10 @@ Wyznaczanie współcznnika $a_2$
     a_2 = 1.27 \cdot a_1 \cdot \sqrt{\frac{S_{sH}}{S_H}} \Big( 1- 0.2 \cdot \frac{S_{sH}}{S_H} \Big)
 \end{equation*}
 
-gdzie $\frac{S_{sH}}{S_H} = \frac{\PlaneVar{SsH}}{\PlaneVar{S_h}} = \PlaneVar{SsH/S_h}$ to stosunek powierzchni steru (\ref{fig:SsH} w \ref{appendix:obl}) do powierzchni usterzenia. 
+gdzie $\frac{S_{sh}}{S_H} = \frac{\PlaneVar{Ssh}}{\PlaneVar{Sh}} = \PlaneVar{Ssh/Sh}$ to stosunek powierzchni steru (\ref{fig:Ssh} w \ref{appendix:obl}) do powierzchni usterzenia. 
    
 \begin{equation} 
-    a_2 = 1.27 \cdot \PlaneVar{a1} \cdot \sqrt{\PlaneVar{SsH/S_h}}\Big( 1- 0.2 \cdot \PlaneVar{SsH/S_h} \Big) = \PlaneVar{a2} rad^{-1}
+    a_2 = 1.27 \cdot \PlaneVar{a1} \cdot \sqrt{\PlaneVar{Ssh/Sh}}\Big( 1- 0.2 \cdot \PlaneVar{Ssh/Sh} \Big) = \PlaneVar{a2} rad^{-1}
 \end{equation}
 
 \section{Kąt zaklinowania usterzenia wysokości}
@@ -181,11 +181,11 @@ gdzie
     \begin{tabular}{rrrrr} 
     \toprule
     \multicolumn{1}{l}{$\bar{x}_c$} & \multicolumn{1}{l}{$C_{mbu}$} & \multicolumn{1}{l}{$\kappa'_H$} & \multicolumn{1}{l}{$\alpha_{zH} [rad]$} & \multicolumn{1}{l}{\begin{tabular}[c]{@{}l@{}}$\alpha_{zH} [deg]$\\\end{tabular}}  \\ 
-    \hline
+    
     0.12                            & -0.074                      & 0.34                            & -0.10                                & -5.95                                                                           \\ 
-    \hline
+    
     0.25                            & -0.039                     & 0.32                        & -0.07                                & -4.16                                                                           \\ 
-    \hline
+    
     0.38                            & -0.004                      & 0.31                        & -0.03                                & -2.17                                                                           \\
     \bottomrule
     \end{tabular}
@@ -264,6 +264,86 @@ Kąt wychylenia steru $\delta_h$ z równania równowagi:
 \end{table}
 \FloatBarrier
 
+
+\section{Siła na drążku w warunkach równowagi}
+W celu wyznaczenia siły na drążku w warunkach równowagi przyjmuję prędkość $V = \PlaneVar{v_cruise} ms^{-1}$.
+
+\begin{equation}
+    P_{dh} = \frac{1}{2}\cdot S_{sH}\cdot c_{sH} \cdot K_{sd} \cdot  V_H^2 \cdot C_{m_{zh}}
+\end{equation}
+gdzie:
+\begin{itemize}
+    \item $S_{sH} = \PlaneVar{S_h}$ - pole powierzchni steru wysokości
+    \item $c_{sH} = \PlaneVar{Ssh}$- średnia cięciwa steru wysokości
+    \item $K_{sd} = \frac{1}{l_d} \cdot \frac{d \delta_h}{d \delta_{dh}} = ???$ - przełożenie liniowe sterownica-ster wysokości
+    \item $l_d = 1$ - przełożenie kątowe sterownica-sterk wysokości
+    \item $C_{m_{zh}}$ - współczynnik momentu zawiasowego
+\end{itemize}
+
+Na podstawie instrukcji \cite{Instrukcja9}, $C_{m_{zh}}$ wyznaczam wzorem:
+
+\begin{equation}
+    C_{m_{zh}}=b_0 + b_1*\alpha_H + b_2\delta_H+b_3\delta_{Hk}
+\end{equation}
+
+
+\begin{equation}
+    \delta_{Hk} = -\frac{b_1}{b_3}\alpha_H-\frac{b_2}{b_3}\delta_H
+\end{equation}
+
+gdzie $\alpha_H$ wyznaczam wzorem:
+\begin{equation}
+    \alpha_H = \frac{C_z}{a}\cdot \Big( 1-\frac{\partial \varepsilon}{\partial \alpha} \Big)+\alpha_{zH} 
+\end{equation}
+
+natomiast współczynnki $b_1$, $b_2$ i $b_3$ na podstawie:
+
+\begin{equation}
+    b_1 = b_{1_{\infty}} \cdot \frac{a_1}{a_{1_{\infty}}} = \PlaneVar{b1inf} \cdot \frac{\PlaneVar{a1}}{\PlaneVar{a1inf}} = \PlaneVar{b1}
+\end{equation}
+\begin{equation}
+    b_2 = b_{2_{\infty}} + \Big( \frac{a_1}{a_{1_{\infty}}} -1 \Big) \cdot b_1 \eta_{sH}  = 
+    \PlaneVar{b2inf} + \Big(\frac{\PlaneVar{a1}}{\PlaneVar{a1inf}}  -1 \Big) \cdot  \PlaneVar{b1} \cdot \PlaneVar{eta_sh} = \PlaneVar{b2} 
+\end{equation}
+\begin{equation}
+    b_3 = b_{3_{\infty}}K_{kl} \Big( \frac{a_1}{a_{1_{\infty}}} -1 \Big) b_1 \eta_{skH} = 
+    \PlaneVar{b3inf}\cdot \PlaneVar{k_kl} \Big( \frac{\PlaneVar{a1}}{\PlaneVar{a1inf}}  -1 \Big) \cdot \PlaneVar{b1} \cdot \PlaneVar{eta_skh} =
+    \PlaneVar{b3}
+\end{equation}
+
+Wartości współczynników $b_{1_{\infty}},b_{2_{\infty}},b_{3_{\infty}}, \eta_{sH}, \eta_{skH}$ odczytane zostały z tabeli z intrukcji \cite{Instrukcja9}:
+
+\begin{itemize}
+    \item $b_{1_{\infty}} = -0.00400$
+    \item $b_{2_{\infty}} = -0.00618$
+    \item $b_{3_{\infty}}$ na podstawie tabeli 9.2 z \cite{Instrukcja9} oraz wartość $\frac{c{sh}}{c_{h}}= 0.56$	$\frac{c_{kh}}{c_{sh}}=0.345$
+    \item $\eta_{sH} = \PlaneVar{eta_sh}$  bo $\frac{S_{sH}}{S_H} = 0.425$
+    \item $\eta_{skH} = \PlaneVar{eta_skh}$ bo $\frac{S_{skh}}{S_{sh}} = 0.270$
+\end{itemize}
+gdzie $\frac{c_{snh}}{c_{sh}} = 0.3$ i  oznacza stosunek średniej cięciwy części steru przed osią obrotu do średniej cięciwy całego steru.
+
+
+Wartość $K_{kl}$ wycznaczam z równania:
+
+\begin{equation}
+    K_{kl} = \frac{S_{sH} \cdot b_{kh}}{S_{kh}\cdot b_{sH}} = \frac{\PlaneVar{Ssh}\cdot \PlaneVar{b_kh}}{\PlaneVar{S0_kh}\cdot \PlaneVar{b_h}} = \PlaneVar{k_kl}
+\end{equation}
+
+Teraz na podstawie równania (8) jestem w stanie wyznaczyć współczynniki przy oraz zależność $\delta_{Hk}(\delta_H)$ 
+\begin{equation}
+    \delta_{Hk} = - \frac{\PlaneVar{b1}}{\PlaneVar{b3}}\alpha_H -\frac{\PlaneVar{b2}}{\PlaneVar{b3}}\delta_H 
+\end{equation}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width = 0.75\linewidth]{imgs/pdh.jpg}
+
+    \caption{Siła na drążku w zależnośći $V$}
+    \label{fig:deltahv}
+\end{figure}
+\FloatBarrier
+
+
 % \begin{thebibliography}{9}
 %     \bibitem{Proj8}
 %     Projekt 8 - Moment podłużny samolotu, Marek Polewski październik 2023
@@ -274,8 +354,8 @@ Kąt wychylenia steru $\delta_h$ z równania równowagi:
 \begin{figure}[h!]
     \centering
     \includegraphics[width = 0.5\linewidth]{imgs/Obliczenia_sh.jpg}
-    \caption{Obliczanie pola $S_{sH}$ z wysunku z Projektu 1 \cite{Proj1}}
-    \label{fig:SsH}
+    \caption{Obliczanie pola $S_{sH}$ z rysunku z Projektu 1 \cite{Proj1}}
+    \label{fig:Ssh}
 \end{figure}
 \FloatBarrier
 
