@@ -83,9 +83,9 @@ Do obliczeń zostały wykorzystane wartości środków ciężkości wyliczone \c
     \begin{tabular}{lr} 
     \toprule
                 & \multicolumn{1}{l}{$\bar x_c [-] $}  \\ 
-    $\bar x_c_1$ & \PlaneVar{bx_c1}                                \\ 
-    $\bar x_c_2$ & \PlaneVar{bx_c2}                                \\ 
-    $\bar x_c_3$ & \PlaneVar{bx_c3}                                \\ 
+    $\bar x_{c_1}$ & \PlaneVar{bx_c1}                                \\ 
+    $\bar x_{c_2}$ & \PlaneVar{bx_c2}                                \\ 
+    $\bar x_{c_3}$ & \PlaneVar{bx_c3}                                \\ 
     \bottomrule
     \end{tabular}
     \label{tab:srodki}
@@ -314,9 +314,9 @@ natomiast współczynnki $b_1$, $b_2$ i $b_3$ na podstawie:
 Wartości współczynników $b_{1_{\infty}},b_{2_{\infty}},b_{3_{\infty}}, \eta_{sH}, \eta_{skH}$ odczytane zostały z tabeli z intrukcji \cite{Instrukcja9}:
 
 \begin{itemize}
-    \item $b_{1_{\infty}} = -0.00400$
-    \item $b_{2_{\infty}} = -0.00618$
-    \item $b_{3_{\infty}}$ na podstawie tabeli 9.2 z \cite{Instrukcja9} oraz wartość $\frac{c{sh}}{c_{h}}= 0.56$	$\frac{c_{kh}}{c_{sh}}=0.345$
+    \item $b_{1_{\infty}} = -0.00400 [1/deg] = \PlaneVar{b1inf} [1/rad]$
+    \item $b_{2_{\infty}} = -0.00618 [1/deg] = \PlaneVar{b2inf} [1/rad]$
+    \item $b_{3_{\infty}} = \PlaneVar{b3inf} 1/rad$ na podstawie tabeli 9.2 z \cite{Instrukcja9} oraz wartość $\frac{c{sh}}{c_{h}}= 0.56$	$\frac{c_{kh}}{c_{sh}}=0.345$
     \item $\eta_{sH} = \PlaneVar{eta_sh}$  bo $\frac{S_{sH}}{S_H} = 0.425$
     \item $\eta_{skH} = \PlaneVar{eta_skh}$ bo $\frac{S_{skh}}{S_{sh}} = 0.270$
 \end{itemize}
