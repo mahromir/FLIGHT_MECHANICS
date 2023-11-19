@@ -7,9 +7,9 @@ proj_name = sys.argv[1]
 
 def get_items_to_gen(sufix: str) -> dict:
     return {
-        "src": [f"bipol_{sufix}.ipynb"],
+        "src": [f"ml_{sufix}.ipynb"],
         "output": [],
-        "latex_raport": [f"bipol_{sufix}.tex"],
+        "latex_raport": [f"ml_{sufix}.tex"],
     }
 
     # get current directory

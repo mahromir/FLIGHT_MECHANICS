@@ -1,4 +1,4 @@
-\documentclass[12pt]{sprawozdanie}
+\documentclass{sprawozdanie}
 \usepackage{color}
 \usepackage{tabularray}
 \usepackage{tikz}
@@ -6,11 +6,21 @@
 \usepackage{graphicx} % Required for inserting images
 \usepackage{multicol}
 \usepackage{booktabs}
+\usepackage{cleveref}
 
 \usepackage{lipsum}
 \usepackage[T1]{fontenc}
 % package to open file containing variables
 \usepackage{datatool, filecontents}
+
+\usepackage[
+backend=biber,
+style = verbose
+]{biblatex}
+
+\addbibresource{ml_proj9.bbl}
+
+
 \DTLsetseparator{,}% Set the separator between the columns.
 
 % import data
@@ -18,7 +28,16 @@
 % Loads mydata.dat with column headers 'thekey' and 'thevalue'
 \newcommand{\PlaneVar}[1]{\DTLfetch{mydata}{thekey}{#1}{thevalue}}
 
+\renewcommand\figurename{Rys.}%skrocony podpis
+\renewcommand\tablename{Tab.}
 
+
+\crefname{equation}{Równ.}{Równ.}
+\Crefname{equation}{Równ.}{Równ.}
+\crefname{figure}{Rys.}{Rys.}
+\Crefname{figure}{Rys.}{Rys.}
+\crefname{table}{Tab.}{Tab.}
+\Crefname{table}{Tab.}{Tab.}
 
 
 \setlength{\headheight}{14.49998pt}
@@ -31,8 +50,6 @@
 \projectName{Projekt 9}
 \facultyName{Wydział Mechaniczny Energetyki i Lotnictwa Politechniki Warszawskiej - Zakład Mechaniki}
 
-\renewcommand\figurename{Rys.}%skrocony podpis
-\renewcommand\tablename{Tab.}
 
 
 \begin{document}
@@ -76,7 +93,6 @@ Dane z poprzednich projektów:
 
 % TODO FIX citation
 Do obliczeń zostały wykorzystane wartości środków ciężkości wyliczone \cite{Proj8}
-
 
 \begin{table}[h!]
     \centering
@@ -149,17 +165,17 @@ Wyznaczanie współcznnika $a_2$
     a_2 = 1.27 \cdot a_1 \cdot \sqrt{\frac{S_{sH}}{S_H}} \Big( 1- 0.2 \cdot \frac{S_{sH}}{S_H} \Big)
 \end{equation*}
 
-gdzie $\frac{S_{sh}}{S_H} = \frac{\PlaneVar{Ssh}}{\PlaneVar{Sh}} = \PlaneVar{Ssh/Sh}$ to stosunek powierzchni steru (\ref{fig:Ssh} w \ref{appendix:obl}) do powierzchni usterzenia. 
+gdzie $\frac{S_{sh}}{S_H} = \frac{\PlaneVar{Ssh}}{\PlaneVar{Sh}} = \PlaneVar{Ssh/Sh}$ to stosunek powierzchni steru (\cref{fig:Ssh} w \cref{appendix:obl}) do powierzchni usterzenia. 
    
 \begin{equation} 
     a_2 = 1.27 \cdot \PlaneVar{a1} \cdot \sqrt{\PlaneVar{Ssh/Sh}}\Big( 1- 0.2 \cdot \PlaneVar{Ssh/Sh} \Big) = \PlaneVar{a2} rad^{-1}
 \end{equation}
 
 \section{Kąt zaklinowania usterzenia wysokości}
-Obliczenia przyjmę dla prędkości przelotowej równej $V= 106kt = 54.4 m/s$ oraz wysokości $h = 0 m$. Przy tej prędkości płat będzie musiał wytworzyć współczynnik $C_z$ o pewnej wartości. 
+Obliczenia przyjmę dla prędkości przelotowej równej $V= 106kt = 32.4 m/s$ oraz wysokości $h = 0 m$. Przy tej prędkości płat będzie musiał wytworzyć współczynnik $C_z$ o pewnej wartości. 
 
 \begin{equation}
-    C_z = \frac{2mg}{\rho S V^2} = \frac{2 \cdot \PlaneVar{mtow} \cdot 9.81 }{1.225 \cdot \PlaneVar{S} \cdot \PlaneVar{v_cruise}^2} = 0.262
+    C_z = \frac{2mg}{\rho S V^2} = \frac{2 \cdot \PlaneVar{mtow} \cdot 9.81 }{1.225 \cdot \PlaneVar{S} \cdot \PlaneVar{v_eco}^2} = 0.68
 \end{equation}
     
 Równanie kąta zaklinowania łopaty:
@@ -175,26 +191,18 @@ gdzie
 \end{equation}
 
 
-% \usepackage{tabularray}
+% Insert tabelka_azh.tex here with \input{tabelka_azh.tex}
 \begin{table}[h!]
+    \let\center\empty
+    % \let\endcenter\relax
     \centering
-    \begin{tabular}{rrrrr} 
-    \toprule
-    \multicolumn{1}{l}{$\bar{x}_c$} & \multicolumn{1}{l}{$C_{mbu}$} & \multicolumn{1}{l}{$\kappa'_H$} & \multicolumn{1}{l}{$\alpha_{zH} [rad]$} & \multicolumn{1}{l}{\begin{tabular}[c]{@{}l@{}}$\alpha_{zH} [deg]$\\\end{tabular}}  \\ 
-    
-    0.12                            & -0.074                      & 0.34                            & -0.10                                & -5.95                                                                           \\ 
-    
-    0.25                            & -0.039                     & 0.32                        & -0.07                                & -4.16                                                                           \\ 
-    
-    0.38                            & -0.004                      & 0.31                        & -0.03                                & -2.17                                                                           \\
-    \bottomrule
-    \end{tabular}
+    \resizebox{0.99\width}{!}{\input{tabelka_azh.tex}}
     \caption{Wyznaczanie $\alpha_{zH}$  - kąta zaklinowania płata}
     \label{tab:azh}
-    \end{table}
+\end{table}
 \FloatBarrier
 
-Jako podstawową wartość przyjmuję $\alpha_{zH} \approx -0.007 rad^{-1}= -4.16 deg$.
+Jako podstawową wartość przyjmuję $\alpha_{zH} \approx -0.133 rad^{-1}= -7.66 deg$.
 
 \section{Kąt wychylenia steru}
 Kąt wychylenia steru $\delta_h$ z równania równowagi:
@@ -266,17 +274,18 @@ Kąt wychylenia steru $\delta_h$ z równania równowagi:
 
 
 \section{Siła na drążku w warunkach równowagi}
-W celu wyznaczenia siły na drążku w warunkach równowagi przyjmuję prędkość $V = \PlaneVar{v_cruise} ms^{-1}$.
+W celu wyznaczenia siły na drążku w warunkach równowagi przyjmuję prędkość $V = \PlaneVar{v_eco} ms^{-1}$.
 
 \begin{equation}
+    \label{eq:pdh}
     P_{dh} = \frac{1}{2}\cdot S_{sH}\cdot c_{sH} \cdot K_{sd} \cdot  V_H^2 \cdot C_{m_{zh}}
 \end{equation}
 gdzie:
 \begin{itemize}
     \item $S_{sH} = \PlaneVar{S_h}$ - pole powierzchni steru wysokości
     \item $c_{sH} = \PlaneVar{Ssh}$- średnia cięciwa steru wysokości
-    \item $K_{sd} = \frac{1}{l_d} \cdot \frac{d \delta_h}{d \delta_{dh}} = ???$ - przełożenie liniowe sterownica-ster wysokości
-    \item $l_d = 1$ - przełożenie kątowe sterownica-sterk wysokości
+    \item $K_{sd} = \frac{1}{l_d} \cdot \frac{d \delta_h}{d \delta_{dh}} = \PlaneVar{ksd}$ - przełożenie liniowe sterownica-ster wysokości
+    \item $l_d = 1$ - przełożenie kątowe sterownica-ster wysokości
     \item $C_{m_{zh}}$ - współczynnik momentu zawiasowego
 \end{itemize}
 
@@ -331,37 +340,39 @@ Wartość $K_{kl}$ wycznaczam z równania:
 
 Teraz na podstawie równania (8) jestem w stanie wyznaczyć współczynniki przy oraz zależność $\delta_{Hk}(\delta_H)$ 
 \begin{equation}
-    \delta_{Hk} = - \frac{\PlaneVar{b1}}{\PlaneVar{b3}}\alpha_H -\frac{\PlaneVar{b2}}{\PlaneVar{b3}}\delta_H 
+    \delta_{Hk} = - \frac{\PlaneVar{b1}}{\PlaneVar{b3}}\alpha_H -\frac{\PlaneVar{b2}}{\PlaneVar{b3}}\delta_H = \PlaneVar{deltaHk_rad} [rad] = \PlaneVar{deltaHk_deg} [deg] 
 \end{equation}
+
+Ostatecznie na podstawie równania \cref{eq:pdh} wyznaczam siłę na drążku dla prędkośći $v_{eco} = \PlaneVar{v_eco}$ w celu weryfikacji wykresu:
+\begin{equation*}
+    1234
+    % P_{dh} = \frac{1}{2}\cdot \PlaneVar{Ssh}\cdot \PlaneVar{Ssh}\cdot \PlaneVar{ksd} \cdot  \PlaneVar{v_eco}^2 \cdot \PlaneVar{C_mzh} =  N
+\end{equation*}
+
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width = 0.75\linewidth]{imgs/pdh.jpg}
-
-    \caption{Siła na drążku w zależnośći $V$}
+    \includegraphics[width = 0.9\linewidth]{imgs/pdh.jpg}
+    \caption{Siła na drążku w zależnośći od $V$}
     \label{fig:deltahv}
 \end{figure}
 \FloatBarrier
 
 
-% \begin{thebibliography}{9}
-%     \bibitem{Proj8}
-%     Projekt 8 - Moment podłużny samolotu, Marek Polewski październik 2023
-% \end{thebibliography}
 
-\appendix
-\chapter{Obliczenia powierzchni steru}\label{appendix:obl}
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width = 0.5\linewidth]{imgs/Obliczenia_sh.jpg}
-    \caption{Obliczanie pola $S_{sH}$ z rysunku z Projektu 1 \cite{Proj1}}
-    \label{fig:Ssh}
-\end{figure}
-\FloatBarrier
+% \appendix
+% \chapter{Obliczenia powierzchni steru}\label{appendix:obl}
+% \begin{figure}[h!]
+%     \centering
+%     \includegraphics[width = 0.5\linewidth]{imgs/Obliczenia_sh.jpg}
+%     \caption{Obliczanie pola $S_{sH}$ z rysunku z Projektu 1 \cite{Proj1}}
+%     \label{fig:Ssh}
+% \end{figure}
+% \FloatBarrier
 
+\printbibliography
 
-
-\bibliographystyle{plain} % We choose the "plain" reference style
-\bibliography{refs} % Entries are in the refs.bib file
+% \bibliographystyle{plain} % We choose the "plain" reference style
+% \bibliography{refs} % Entries are in the refs.bib file
 
 \end{document}

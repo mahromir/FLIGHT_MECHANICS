@@ -29,7 +29,7 @@ example:
 
 ### Use of utility functions
 
-- `dir_gen.py` - generates defualt tree with files, (TODO: use json file to set working tree)
+- `dir_gen.py` - generates defualt tree with files,
   ```powershell
   python .\utility\dir_gen.py <proj_name>
   ```
@@ -39,5 +39,24 @@ example:
 commits with prefix of current project number example:
 
 ```
-git commit -m"<project_number><verion>:<Description>"
+git commit -m"<project_number>.<verion>:<Description>"
 ```
+
+### Insert variables in `.tex` file
+
+```
+% import data
+\DTLloaddb[noheader, keys={thekey,thevalue}]{mydata}{../../database/plane_properties.csv}
+
+% Loads mydata.dat with column headers 'thekey' and 'thevalue'
+\newcommand{\PlaneVar}[1]{\DTLfetch{mydata}{thekey}{#1}{thevalue}}
+
+% Insert variable in text
+\PlaneVar{S_h}
+
+```
+
+## TODOs:
+
+- [ ] use json file to set working tree
+- [ ] copy files from base_files to desired location automatically

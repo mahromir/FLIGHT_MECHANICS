@@ -4,7 +4,7 @@ def baza_danych_projektowych_to_csv():
     # df = pd.read_excel("../../database/BIPOL.xlsx", sheet_name="Baza")
     # # df.columns
     # df = df[["Zmienna", "Wartość", "Jednostka"]]
-    # df.round({"Wartość": 2})
+    # df = df.round({"Wartość": 2})
     # df.to_csv("../../database/plane_properties.csv", index=False)
     # Sprawdzasz ile jest kolumn z projektami
     df = pd.read_excel("../../database/ml_projekty.xlsx", sheet_name="Baza")
@@ -36,7 +36,7 @@ def baza_danych_projektowych_to_csv():
             usecols=pair,
             skiprows=1,
         )
-        df = df.dropna()
+        df = df.fillna(0, inplace=True)
 
         # Zmieniaj nazwy kolumn aby pozbyć się kroprek
         new_names = {}

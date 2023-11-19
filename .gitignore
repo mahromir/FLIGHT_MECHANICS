@@ -1,20 +1,30 @@
 *.png
 *.jpg
-*.pdf
+# *.pdf
 *.txt
 
+reports1-6/
+__pycache__/
+dev.ipynb
+
+*.xml
+*.run.xml
 
 ~$ml_projekty.xlsx
 # latex relatex files
-latex_raport/
+# latex_raport/
 # base_files/
 *.aux
 *.fdb_latexmk
 *.fls 
 *.log
 *.gz
+*.bcf
+*.aux
 *.bbl
 *.out
 *.toc
 *.blg
-*.cls
+# *.cls
+
+main.pdf
