@@ -18,7 +18,7 @@ backend=biber,
 style = verbose
 ]{biblatex}
 
-\addbibresource{ml_proj9.bbl}
+\addbibresource{ml_proj9.bib}
 
 
 \DTLsetseparator{,}% Set the separator between the columns.
@@ -165,7 +165,7 @@ Wyznaczanie współcznnika $a_2$
     a_2 = 1.27 \cdot a_1 \cdot \sqrt{\frac{S_{sH}}{S_H}} \Big( 1- 0.2 \cdot \frac{S_{sH}}{S_H} \Big)
 \end{equation*}
 
-gdzie $\frac{S_{sh}}{S_H} = \frac{\PlaneVar{Ssh}}{\PlaneVar{Sh}} = \PlaneVar{Ssh/Sh}$ to stosunek powierzchni steru (\cref{fig:Ssh} w \cref{appendix:obl}) do powierzchni usterzenia. 
+gdzie $\frac{S_{sh}}{S_H} = \frac{\PlaneVar{Ssh}}{\PlaneVar{Sh}} = \PlaneVar{Ssh/Sh}$ to stosunek powierzchni steru do powierzchni usterzenia. 
    
 \begin{equation} 
     a_2 = 1.27 \cdot \PlaneVar{a1} \cdot \sqrt{\PlaneVar{Ssh/Sh}}\Big( 1- 0.2 \cdot \PlaneVar{Ssh/Sh} \Big) = \PlaneVar{a2} rad^{-1}
@@ -215,7 +215,7 @@ Kąt wychylenia steru $\delta_h$ z równania równowagi:
 \begin{figure}[h!]
     \centering
     \includegraphics[width = 0.75\linewidth]{imgs/delta_h_cz.jpg}
-    \caption{Kąt wychylenia steru niezbędny do zachowania równowagi dla różnego $C_z$}
+    \caption{Kąt wychylenia steru niezbędny do zachowania równowagi dla różnego $C_z$ na podstawie \cref{tab:deltahv}}
     \label{fig:deltahcz}
 \end{figure}
 \FloatBarrier
@@ -224,7 +224,7 @@ Kąt wychylenia steru $\delta_h$ z równania równowagi:
     \centering
     \includegraphics[width = 0.75\linewidth]{imgs/delta_h_v.jpg}
 
-    \caption{Kąt wychylenia steru niezbędny do zachowania równowagi dla różnego $V$}
+    \caption{Kąt wychylenia steru niezbędny do zachowania równowagi dla różnego $V$ na podstawie \cref{tab:deltahv}}
     \label{fig:deltahv}
 \end{figure}
 \FloatBarrier
@@ -268,7 +268,7 @@ Kąt wychylenia steru $\delta_h$ z równania równowagi:
         \bottomrule
         \end{tabular}
     \caption{Kąt wychylenia stery niezbędnego do zachowania równowagi}
-    \label{tab:deltahv}        
+    \label{tab:deltahv}
 \end{table}
 \FloatBarrier
 
