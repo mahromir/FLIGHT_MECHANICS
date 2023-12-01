@@ -1,10 +1,8 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{sprawozdanie}
 
-\LoadClass[12pt, twoside]{article}
+\LoadClass[9pt, twoside]{article}
 \RequirePackage{lmodern}
-\RequirePackage{amsmath}
-\RequirePackage[T1]{fontenc}
 \RequirePackage[utf8]{inputenc}
 \RequirePackage{graphics}
 \RequirePackage{xcolor}
@@ -15,19 +13,15 @@
 
 \RequirePackage{fancyhdr}
 \RequirePackage{multirow}
-\RequirePackage{hyperref}
 \RequirePackage{placeins}
-\RequirePackage{geometry}
 
 \RequirePackage{appendix}
 \RequirePackage{rotating}
 \RequirePackage{fourier}
 \RequirePackage{amsmath}
 \RequirePackage[T1]{fontenc}
-\RequirePackage{subcaption}
 \RequirePackage{graphicx}
 \RequirePackage{tabularray}
-\RequirePackage{subfig}
 \RequirePackage{caption}
 \RequirePackage{adjustbox}
 \RequirePackage{subfig}
@@ -65,10 +59,7 @@
 \renewcommand{\maketitle}{
 
   \begin{titlepage}
-    \cornersize{0}
-    \fancyput(3.25in,-4.5in){%
-            \setlength{\unitlength}{1.1in}\fancyoval(7,9.5)}%
-
+    
         \begin{center}
         %   \begin{tikzpicture}[remember picture, overlay]
         %     \draw[line width = 1pt] ($(current page.north west) + (2cm, 2cm)$) rectangle ($(current page.south east) + (2cm,2cm)$);
@@ -79,12 +70,12 @@
         \begin{flushright}
             \textsc{\Large \@author}\\ [0.1cm]
             \textsc{\Large \@class}\\ [0.1cm]
-            \textsc{\Large Prowadzący: \@intstructor}\\[0.1cm]
-            \textsc{\Large Grupa 1, środa 8:15-9:00}\\[0.1cm]
+            \textsc{\Large \@instructor}\\[0.1cm]
+            \textsc{\Large wtorek 14:15-16:00}\\[0.1cm]
         
         \end{flushright}
         
-        \\[5cm]
+        \vspace*{5cm}
         
         % Title
         % \HRule \\[0.4cm]
@@ -93,7 +84,7 @@
         
         \vfill
         \flushleft
-        \textsc{\Large Data oddania projektu: } \hfill  \textsc{\Large Ocena: ...............}\\ [0.3cm]
+        \textsc{\Large Data oddania projektu: } \hfill  \textsc{\Large Ocena: ...............}
         \textsc{\Large ..........................} 
 
         \end{center}
@@ -104,5 +95,9 @@
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhf[EHC]{\@facultyName}
-\fancyhf[OHC]{\@author  \@projectName - \@title}
+\fancyhf[OHC]{\@author \@projectName - \@title}
 \fancyfoot[LE,RO]{\thepage}
+
+
+
+\endinput

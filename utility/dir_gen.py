@@ -9,7 +9,7 @@ def get_items_to_gen(sufix: str) -> dict:
     return {
         "src": [f"ml_{sufix}.ipynb"],
         "output": [],
-        "latex_raport": [f"ml_{sufix}.tex"],
+        "latex_raport": [f"ml_{sufix}.tex", f"ml_{sufix}.bib", "sprawozdanie.cls"],
     }
 
     # get current directory

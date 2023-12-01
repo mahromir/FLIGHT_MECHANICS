@@ -1,25 +1,54 @@
-\documentclass[12pt]{sprawozdanie}
+\documentclass{sprawozdanie}
 \usepackage{color}
 \usepackage{tabularray}
 \usepackage{tikz}
 \usepackage{polski}
 \usepackage{graphicx} % Required for inserting images
 \usepackage{multicol}
+\usepackage{booktabs}
+\usepackage{cleveref}
+
 \usepackage{lipsum}
 \usepackage[T1]{fontenc}
+% package to open file containing variables
+\usepackage{datatool, filecontents}
+
+\usepackage[
+backend=biber,
+style = verbose
+]{biblatex}
+
+\addbibresource{ml_proj10.bib}
+
+\DTLsetseparator{,}% Set the separator between the columns.
+
+% import data
+\DTLloaddb[noheader, keys={thekey,thevalue}]{mydata}{../../database/plane_properties.csv}
+% Loads mydata.dat with column headers 'thekey' and 'thevalue'
+\newcommand{\PlaneVar}[1]{\DTLfetch{mydata}{thekey}{#1}{thevalue}}
+
+\renewcommand\figurename{Rys.}%skrocony podpis
+\renewcommand\tablename{Tab.}
+
+
+\crefname{equation}{Równ.}{Równ.}
+\Crefname{equation}{Równ.}{Równ.}
+\crefname{figure}{Rys.}{Rys.}
+\Crefname{figure}{Rys.}{Rys.}
+\crefname{table}{Tab.}{Tab.}
+\Crefname{table}{Tab.}{Tab.}
+
 
 \setlength{\headheight}{14.49998pt}
 \addtolength{\topmargin}{-2.49998pt}
 
-\title{„Własności aerodynamiczne samochodu”}
+\title{„Równowaga podłużna samolotu i siły na sterownicy wysokości”}
 \author{Marek Polewski}
-\class{BIPOL}
-\instructor{dr. inż Marcin Figat}
-\projectName{Projekt 1}
+\class{Mechanika Lotu 2}
+\instructor{dr. inż Maciej Lasek}
+\projectName{Projekt 9}
 \facultyName{Wydział Mechaniczny Energetyki i Lotnictwa Politechniki Warszawskiej - Zakład Mechaniki}
 
-\renewcommand\figurename{Rys.}%skrocony podpis
-\renewcommand\tablename{Tab.}
 
 
 \begin{document}
@@ -37,21 +66,8 @@
 \setcounter{page}{1}
 
 
-\section{Samochodzik}
-
-Zamiast wciągać kresli wole głaskać pieski
-
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width = 0.4\linewidth]{imgs/burek.jpg}
-    \caption{Burek.jpg}
-    \label{fig:burek}
-\end{figure}
-\FloatBarrier
 
 
-\section{Scoby doo}
-QDASDA
-
+\printbibliography
 
 \end{document}
