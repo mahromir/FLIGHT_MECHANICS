@@ -36,7 +36,7 @@ def baza_danych_projektowych_to_csv():
             usecols=pair,
             skiprows=1,
         )
-        df = df.fillna(0, inplace=True)
+        df = df.dropna()
 
         # Zmieniaj nazwy kolumn aby pozbyć się kroprek
         new_names = {}
