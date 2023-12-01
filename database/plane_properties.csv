@@ -8,7 +8,6 @@ v_cruise,54.0
 mtow,726.0
 v_stall,24.0
 v_eco,34.0
-Lambda,6.59
 a,4.452
 l_k,7.29
 l_nk,1.61
@@ -23,7 +22,9 @@ C_m0k,-0.0024
 bx_c1,0.12
 bx_c2,0.25
 bx_c3,0.38
+alpha_0,-2.5
 bx_sah,2.86
+x_sah,4.29
 kappa_c1,0.34
 kappa_c2,0.33
 kappa_c3,0.31
@@ -42,7 +43,6 @@ S0_kh,0.471
 k_kl,0.5
 1/lambda_h,0.667
 Lambda_h,4.118
-Lambda,6.597
 Ssh,0.934
 Ssh/Sh,0.425
 Skh/Ssh,0.27
@@ -72,3 +72,19 @@ b3,-0.388
 ksd,1.0
 deltaHk_rad,0.0334
 deltaHk_deg,1.913
+pdh,0.0
+ldH,1.0
+kghn,0.9528
+kghn',0.9761
+kghm,0.9478
+kghm',0.9636
+mu,16.45
+kappa'_h,0.3573
+bar_xsa,0.24
+bar_zs,-0.237
+delta_xsak,-0.0252
+xsah,-0.0252
+xsaj,0.03
+m_calc,670.0
+rho ,1.225
+kdh,1.0

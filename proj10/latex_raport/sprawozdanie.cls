@@ -70,6 +70,7 @@
         \begin{flushright}
             \textsc{\Large \@author}\\ [0.1cm]
             \textsc{\Large \@class}\\ [0.1cm]
+            \textsc{\Large Cessna 150m}\\ [0.1cm]
             \textsc{\Large \@instructor}\\[0.1cm]
             \textsc{\Large wtorek 14:15-16:00}\\[0.1cm]
         
@@ -95,7 +96,7 @@
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhf[EHC]{\@facultyName}
-\fancyhf[OHC]{\@author \@projectName - \@title}
+\fancyhf[OHC]{\@author  \@projectName - \@title}
 \fancyfoot[LE,RO]{\thepage}
 
 

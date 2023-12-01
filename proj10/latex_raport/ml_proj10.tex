@@ -7,7 +7,7 @@
 \usepackage{multicol}
 \usepackage{booktabs}
 \usepackage{cleveref}
-
+\usepackage{subfig}
 \usepackage{lipsum}
 \usepackage[T1]{fontenc}
 % package to open file containing variables
@@ -45,8 +45,8 @@ style = verbose
 \title{„Podłużna statyczna stateczność i sterowność samolotu”}
 \author{Marek Polewski}
 \class{Mechanika Lotu 2}
-\instructor{dr. inż Maciej Lasek}
-\projectName{Projekt 9}
+\instructor{dr inż. Maciej Lasek}
+\projectName{Projekt 10}
 \facultyName{Wydział Mechaniczny Energetyki i Lotnictwa Politechniki Warszawskiej - Zakład Mechaniki}
 
 
@@ -67,17 +67,183 @@ style = verbose
 
 \section{Wstęp}
 
-\subsection{Cel projektu}
+Celem projektu jest sprawdzenie statycznej stateczności i sterowności podłużnej. Obliczenia zostały wykonane w język Python.
 
-
-\begin{figure}[h!]
+Podsatawowe zmienne wykorzystane do obliczeń:
+\begin{itemize}
+    \item powierzchnia nośna $S = \PlaneVar{S} m^2$,   
+    \item powierzchnia steru wysokości $S_H = \PlaneVar{S_h} m^2$,
+    \item Średnia cięciwa aerodynamiczna $C_a = \PlaneVar{C_a} m $,
+    \item wydłużenie płata $\Lambda = \PlaneVar{Lambda}$,
+    \item średnia cięciwa steru wysokości $C_{sH} = \PlaneVar{śr.c_h} m$,
+\end{itemize}
+Ponaddto zostało założone przełożenie kątowe drążka $K_{dh} = \PlaneVar{ksd}$
+\begin{table}[H]
     \centering
-    \includegraphics[width=0.9\textwidth]{imgs/Wzory.jpg}
-    \caption{Wzory wykorzystane do obliczeń}.
-    \label{fig:wzory1}
-\end{figure}
-\FloatBarrier     
+    \input{tabela_xc.tex}
+    \label{tab:srodki}
+    \caption{Położenia środka ciężkości samolotu}
+\end{table}
 
+\section{Środki statecznej statecznosci i sterowności podłużnej}
+
+\begin{align}
+    \bar x_N &= \left(\bar x_{SA} + \sum_j \Delta \bar x_{SA_j} + \bar z_s \left(2 \cdot C_z \left(\frac{1}{\pi \Lambda} - \frac{1}{a}\right) - \alpha_0\right) + \kappa'^0_H \cdot\frac{a_1}{a}\cdot\left(1 - \frac{\partial \varepsilon}{\partial \alpha}\right)\right) \cdot K_{gHN} \label{eq:xN}\\
+    \bar x_{N'} &= \left(\bar x_{SA} + \sum_j \Delta \bar x_{SA_j} + \bar z_s \left(2 \cdot C_z \left(\frac{1}{\pi \Lambda} - \frac{1}{a}\right) - \alpha_0\right) + \kappa'^0_H \cdot\frac{a_1}{a}\cdot\left(1 - \frac{\partial \varepsilon}{\partial \alpha}\right)\cdot\left(1 - \frac{a_2}{a_1}\cdot\frac{b_1}{b_2}\right)\right) \cdot K_{gHN'} \label{eq:xNprim}\\
+    \bar x_M &= \left(\bar x_{SA} + \sum_j \Delta \bar x_{SA_j} + \bar z_s \left(2 \cdot C_z \left(\frac{1}{\pi \Lambda} - \frac{1}{a}\right) - \alpha_0\right) + \kappa'^0_H \cdot\frac{a_1}{a}\cdot\left(\left(1 - \frac{\partial \varepsilon}{\partial \alpha}\right) + \frac{a}{\mu_1^0}\right)\right) \cdot K_{gHM} \label{eq:xM}\\
+    \bar x_{M'} &= \left(\bar x_{SA} + \sum_j \Delta \bar x_{SA_j} + \bar z_s \left(2 \cdot C_z \left(\frac{1}{\pi \Lambda} - \frac{1}{a}\right) - \alpha_0\right) + \kappa'^0_H \cdot\frac{a_1}{a}\cdot\left(1 - \frac{a_2}{a_1}\cdot\frac{b_1}{b_2}\right)\cdot\left(\left(1 - \frac{\partial \varepsilon}{\partial \alpha}\right) + \frac{a}{\mu_1^0}\right)\right) \cdot K_{gHM'} \label{eq:xMprim}
+\end{align}
+
+
+
+% przy czym wielkości \(K_{gHN}\), \(K_{gHN'}\), \(K_{gHM}\), \(K_{gHM'}\) są współczynnikami obliczonymi odpowiednio z Równań \eqref{eq:KgHN}, \eqref{eq:KgHNprim}, \eqref{eq:KgHM} i \eqref{eq:KgHMprim}.
+
+\begin{align}
+    K_{gHN} &= \frac{1}{1+\frac{S_H}{S}\cdot\frac{a_1}{a}\cdot\left(\frac{V_{H\infty}}{V_\infty}\right)^2 \cdot \left(1 - \frac{\partial\varepsilon}{\partial\alpha}\right)} = \PlaneVar{kghn} \label{eq:KgHN}\\
+    K_{gHN'} &= \frac{1}{1+\frac{S_H}{S}\cdot\frac{a_1}{a}\cdot\left(\frac{V_{H\infty}}{V_\infty}\right)^2 \cdot \left(1 - \frac{\partial\varepsilon}{\partial\alpha}\right)\cdot\left(1 - \frac{a_2}{a_1}\cdot\frac{b_1}{b_2}\right)} = \PlaneVar{kghn'} \label{eq:KgHNprim}\\
+    K_{gHN} &= \frac{1}{1+\frac{S_H}{S}\cdot\frac{a_1}{a}\cdot\left(\frac{V_{H\infty}}{V_\infty}\right)^2 \cdot \left(\left(1 - \frac{\partial\varepsilon}{\partial\alpha}\right) + \frac{2 a}{\mu^0_1}\right)}\label{eq:KgHM} = \PlaneVar{kghm}\\
+    K_{gHM'} &= \frac{1}{1+\frac{S_H}{S}\cdot\frac{a_1}{a}\cdot\left(\frac{V_{H\infty}}{V_\infty}\right)^2 \cdot \left(\left(1 - \frac{\partial\varepsilon}{\partial\alpha}\right) + \frac{2 a}{\mu_1^0}\right)\cdot\left(1 - \frac{a_2}{a_1}\cdot\frac{b_1}{b_2}\right)} = \PlaneVar{kghm'} \label{eq:KgHMprim}
+\end{align}
+
+\begin{equation}
+    \mu_1^0 = \frac{m}{\frac{1}{2}\cdot\rho S x_{SAH}} = \PlaneVar{mu}
+    \label{eq:muzeroone}
+\end{equation}
+
+
+\begin{equation}
+    \kappa'^0_H = \frac{S_H x_{SAH}}{S \cdot c_a}\cdot\left(\frac{V_{H\infty}}{V_\infty}\right) = \PlaneVar{kappa'_h}
+    \label{eq:kappazerH}
+\end{equation}
+
+\begin{table}[H]
+    \let\center\empty
+    % \let\endcenter\relax
+    \centering
+    \resizebox{0.99\width}{!}{\input{tabelka_1.tex}}
+    \caption{Tablica z danymi do obliczeń.}
+    \label{tab:tab1}
+\end{table}
+
+% insert images from imgs folder with captions and labels xn_cz.png and xn_v.png images side by side with subplots
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{imgs/xn_cz.png}
+    \caption{Wykresy w funkcji $Cz$}
+    \label{fig:xn_cz}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{imgs/xn_v.png}
+    \caption{Wykresy w funkcji $V$}
+    \label{fig:xn_cz2}
+\end{figure}
+
+\section{Zapasy podłużnej stateczności i sterowności samolotu}
+
+Kryteria sterownoci podłunej względem prędkoci definiowane jako pochodne kąta
+wychylenia steru wysokoci oraz siły na drążku (wolancie) względem prędkoci lotu dane są następującymi zależnościami:
+
+\begin{itemize}
+    \item Zapas stateczności ze sterem trzymanym:
+    \begin{equation*}
+        \bar{h_N} = \bar{x_N}-\bar{x_c} 
+    \end{equation*}
+    \item Zapas stateczności ze sterem puszczonym:
+    \begin{equation*}
+        \bar{h_N} = \bar{x_N}-\bar{x_c} 
+    \end{equation*}
+    \item Zapas sterowności ze sterem trzymanym:
+    \begin{equation*}
+        \bar{h_N} = \bar{x_N}-\bar{x_c} 
+    \end{equation*}
+    \item Zapas sterowności ze sterem puszczonym:
+    \begin{equation*}
+        \bar{h_N} = \bar{x_N}-\bar{x_c} 
+    \end{equation*}
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \subfloat[Zapas stateczności ze sterem trzymanym]{\includegraphics[width=0.49\textwidth]{imgs/hn_v1.png}\label{fig:hn_v1}}
+    \hfill
+    \subfloat[Zapas stateczności ze sterem puszczonym]{\includegraphics[width=0.49\textwidth]{imgs/hn_v2.png}\label{fig:hn_v2}}
+    \vfill
+    \subfloat[Zapas sterowności ze sterem trzymanym]{\includegraphics[width=0.49\textwidth]{imgs/hn_v3.png}\label{fig:hn_v3}}
+    \hfill
+    \subfloat[Zapas sterowności ze sterem puszczonym]{\includegraphics[width=0.49\textwidth]{imgs/hn_v4.png}\label{fig:hn_v4}}
+    \caption{Zapas stateczności i sterowności w funkcji prędkości}
+\end{figure}
+
+\section{Kryterium sterowności podłużnej samolotu}
+
+\subsection{Względem prędkości lotu}
+Kryteria sterowności podłunej względem prędkoci definiowane jako pochodne kąta wychylenia steru wysokoci oraz siły na drążku (wolancie) względem prędkoci. Wyniki zostały przedstawione w 
+
+\begin{align}
+    \frac{\delta_H}{dV} = \frac{4mg}{\rho S \kappa_H'^{0} \cdot a_2} \cdot \frac{1}{V^3} \cdot \bar h_N \label{ddeltadV} 
+\end{align}
+\begin{align*}   
+    \frac{\delta_H}{dV} = \frac{4\cdot \PlaneVar{m_calc} \cdot 9.81}{1.225 \cdot \PlaneVar{S} \cdot \PlaneVar{kappa'_h}\cdot \PlaneVar{a2}} \cdot \frac{1}{V^3} \cdot \bar h_N  
+\end{align*}
+
+\begin{align}
+    \frac{dP_{dH}}{dV} = -2mgK_{dH} \cdot \frac{S_{Sh}\cdot  c_{sH}}{S_H \cdot x_{SAH}} \cdot \frac{c_a}{l_{dH}} \cdot \frac{1}{V} \cdot \bar h_{N'}
+\end{align}
+\begin{align*}   
+    \frac{dP_{dH}}{dV} = -2\cdot \PlaneVar{m_calc} \cdot 9.81 \cdot \PlaneVar{kdh} \cdot \frac{\PlaneVar{Sh} \cdot \PlaneVar{śr.c_h}}{\PlaneVar{S} \cdot \PlaneVar{x_sah}} \cdot \frac{\PlaneVar{ca}}{\PlaneVar{ldH}} \cdot \frac{1}{V} \cdot \bar h_{N'}
+\end{align*}
+
+
+\begin{figure}[H]
+    \centering
+    \subfloat[Pochodna wychylenia stery wysokości]{\includegraphics[width=0.8\textwidth]{imgs/d_delta_v.png}\label{fig:deltah_v}}
+    \vfill
+    \subfloat[Przyrost siły na drążku]{\includegraphics[width=0.8\textwidth]{imgs/d_P_v.png}\label{fig:dPdV}}
+
+    \caption{Kryteria sterowności podłużnej w funkcji prędkości}
+\end{figure}
+
+\subsection{Względem przeciążenia}
+
+Kryteria sterowności podłużnej względem przeciążenia: przyrost kąta wychylenia względem współczynnika przeciążeń i przyrost siły na drążku odniesiony do współczynnika przeciążeń
+
+\begin{equation}
+    \frac{\Delta\delta_H}{m_g-1} = - 2 \cdot m \cdot g \cdot \frac{c_a}{\rho \cdot S_H \cdot x_{SAH}\cdot a_2}\cdot \frac{1}{V^2}\cdot \bar h_M
+    \label{eq:DdHmg1}
+\end{equation}
+
+\begin{equation*}
+    \frac{\Delta\delta_H}{m_g-1} = - 2 \cdot \PlaneVar{m_calc} \cdot 9.81 \cdot \frac{\PlaneVar{ca}}{1.225 \cdot \PlaneVar{Sh} \cdot \PlaneVar{x_sah}\cdot \PlaneVar{a2}}\cdot \frac{1}{V^2}\cdot \bar h_M
+\end{equation*}
+
+\begin{equation}
+    \frac{\Delta P_{dH}}{m_g-1} = m\cdot g \cdot K_{dH} \cdot \frac{c_a}{l_{dH}} \cdot \frac{S_{SH} \cdot c_{SH}}{S_H \cdot x_{SAH} \cdot \frac{b_2}{a_2}}\cdot \bar h_{M'}
+    \label{eq:DPdHmg}
+\end{equation}
+
+\begin{equation*}
+    \frac{\Delta P_{dH}}{m_g-1} = \PlaneVar{m_calc} \cdot 9.81 \cdot \PlaneVar{kdh} \cdot \frac{\PlaneVar{ca}}{\PlaneVar{ldH}} \cdot \frac{\PlaneVar{Sh} \cdot \PlaneVar{śr.c_h}}{\PlaneVar{S} \cdot \PlaneVar{x_sah} \cdot \frac{\PlaneVar{b2}}{\PlaneVar{a2}}}\cdot \bar h_{M'}
+\end{equation*}
+
+\begin{figure}[H]
+    \centering
+    \subfloat[Pochodna wychylenia stery wysokości]{\includegraphics[width=0.8\textwidth]{imgs/delta_delta_v.png}\label{fig:deltah_mg}}
+    \vfill
+    \subfloat[Przyrost siły na drążku]{\includegraphics[width=0.8\textwidth]{imgs/delta_p_v.png}\label{fig:dPdmg}}
+
+    \caption{Kryteria sterowności podłużnej w funkcji przeciążenia}
+\end{figure}
+
+\subsection{Podsumowanie}
+
+Na podsatwie warunkkuów zawartych w instrukcji można swierdzić, że ------:
+\begin{align*}
+    \frac{d\delta_H}{dV}>0 \quad \frac{dP_{dH}}{dV}<0 \quad \frac{\Delta\delta_H}{m_g-1}<0 \quad \frac{\Delta P_{dH}}{m_g-1}>0
+\end{align*}
 
 
 \printbibliography
