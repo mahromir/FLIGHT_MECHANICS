@@ -1,0 +1,145 @@
+\documentclass{sprawozdanie}
+\usepackage{color}
+\usepackage{tabularray}
+\usepackage{tikz}
+\usepackage{polski}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{multicol}
+\usepackage{booktabs}
+\usepackage{cleveref}
+
+\usepackage{lipsum}
+\usepackage[T1]{fontenc}
+% package to open file containing variables
+\usepackage{datatool, filecontents}
+
+\usepackage[
+backend=biber,
+style = verbose
+]{biblatex}
+
+\addbibresource{ml_proj9.bib}
+
+
+\DTLsetseparator{,}% Set the separator between the columns.
+
+% import data
+\DTLloaddb[noheader, keys={thekey,thevalue}]{mydata}{../../database/plane_properties.csv}
+% Loads mydata.dat with column headers 'thekey' and 'thevalue'
+\newcommand{\PlaneVar}[1]{\DTLfetch{mydata}{thekey}{#1}{thevalue}}
+
+\renewcommand\figurename{Rys.}%skrocony podpis
+\renewcommand\tablename{Tab.}
+
+
+\crefname{equation}{Równ.}{Równ.}
+\Crefname{equation}{Równ.}{Równ.}
+\crefname{figure}{Rys.}{Rys.}
+\Crefname{figure}{Rys.}{Rys.}
+\crefname{table}{Tab.}{Tab.}
+\Crefname{table}{Tab.}{Tab.}
+
+
+\setlength{\headheight}{14.49998pt}
+\addtolength{\topmargin}{-2.49998pt}
+
+\title{„Analiza ruchów fugoidalnych samolotu”}
+\author{Marek Polewski}
+\class{Mechanika Lotu 2}
+\instructor{dr. inż Maciej Lasek}
+\projectName{Projekt 12}
+\facultyName{Wydział Mechaniczny Energetyki i Lotnictwa Politechniki Warszawskiej - Zakład Mechaniki}
+
+
+
+\begin{document}
+
+\maketitle
+
+\leavevmode\thispagestyle{empty}
+\newpage
+
+
+\tableofcontents
+
+\FloatBarrier
+\setcounter{page}{1}
+
+
+
+\section{Wstęp}
+Obliczenia zostały wykonane w programie EXCEL. Wyszystkie obliczenia zostały wkononane dla samolotu o następujących parametrach:
+\begin{itemize}
+    \item $m = 700kg$,
+    \item $S = 15 m^2$,
+    \item $h = 3km$,
+    \item $\rho(h = 3km) = 0.908 kgm^{-3}$
+\end{itemize}
+
+\section{Równania ruchu samolotu}
+Zastosowane zostały poniższe równania ruchu samolotu:
+\begin{align}
+    m \frac{dv}{dt} + mg sin(\vartheta) + \frac{1}{2}\rho S(V_0+v)^2 C_x = 0
+\end{align}
+\begin{align}
+    mV_0 \frac{d\vartheta}{dt} + mg cos(\vartheta) - \frac{1}{2}\rho S(V_0+v)^2 C_z = 0
+\end{align}
+Równania te zostały sprawdzone do bezwymiarowych równań ruchu:
+\begin{align}
+    \frac{d\bar v}{d\bar t} + \frac{1}{2} C_z \vartheta + C_x \bar v = 0
+\end{align}
+\begin{align}
+    \frac{d\bar \vartheta}{d\bar t} + \frac{1}{2} C_x \vartheta + C_z \bar v = 0
+\end{align}
+gdzie $\bar v = \frac{v}{V_0}$, $\bar \vartheta $ - bezwymiarowe zaburzenie kąta pochylenia, $\bar t$ bezwymiarowy czas, $\hat t = \frac{2m}{\rho S V_0}$ - czas aerodynamiczny
+
+Pierwiaskami zespolonymi sprzeżnomi równań (1) i (2) są:
+\begin{align*}
+    \lambda_{1,2} = -\frac{3}{4} C_x \pm i \cdot \sqrt{\frac{1}{2} \Big( C_x^2+C_z^2 \Big) - \frac{9}{16} C_x^2}
+\end{align*}
+Wówczas otrzymyjemy:\\
+Bezwymiarowy współczynnik tłuamienia:
+\begin{align*}
+    \bar \zeta = -\frac{3}{4} C_x
+\end{align*}
+Bezwymiarowa częstość ruchu okresowego:
+\begin{align*}
+    \bar \eta = \sqrt{\frac{1}{2} \Big( C_x^2+C_z^2 \Big) - \frac{9}{16} C_x^2}
+\end{align*}
+Okres ruchu:
+\begin{align*}
+    T = \frac{w \pi}{\sqrt{\frac{1}{2} \Big( C_x^2+C_z^2 \Big) - \frac{9}{16} C_x^2}} \cdot i
+\end{align*}
+czas stłumienia amplotudy do $\frac{1}{2}$:
+\begin{align*}
+    T_{\frac{1}{2}} = \frac{\ln 2}{\frac{3}{4}C_x}\cdot i
+\end{align*}
+Otrzymane wartości zamieszczam w tabeli:
+% insert table table.tex here
+\begin{table}[H]
+    \centering
+    \input{table.tex}
+    \caption{Wartości parametrów ruchu samolotu}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{imgs/reim.png}
+    \caption{Bezwymiarowe wartości w czasie}
+    \label{fig:fig1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{imgs/T.png}
+    \caption{Parametry okresowe ruchów fugoidalnych}
+\end{figure}
+
+\section{Ruchy fugoidalne}
+Do obliczeń wybrałem prędkość $V = 44.5 ms^{-1}$, oraz zakłucenie prędkości $v_0 = 0.5 ms^{-1}$.
+\begin{align*}
+    -\frac{\bar \xi +C_x}{C_z} \pm i \frac{2\bar eta}{C_z} = a \pm i b = -\frac{2*0.3596*0.0647}{0.5091} \pm i \frac{}{}
+\end{align*}
+
+
+\end{document}
