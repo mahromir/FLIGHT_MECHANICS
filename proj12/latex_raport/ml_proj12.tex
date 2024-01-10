@@ -56,13 +56,9 @@ style = verbose
 
 \maketitle
 
-\leavevmode\thispagestyle{empty}
 \newpage
 
 
-\tableofcontents
-
-\FloatBarrier
 \setcounter{page}{1}
 
 
@@ -124,22 +120,43 @@ Otrzymane wartości zamieszczam w tabeli:
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{imgs/reim.png}
+    \includegraphics[width=0.6\textwidth]{imgs/reim.png}
     \caption{Bezwymiarowe wartości w czasie}
     \label{fig:fig1}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{imgs/T.png}
+    \includegraphics[width=0.6\textwidth]{imgs/T.png}
     \caption{Parametry okresowe ruchów fugoidalnych}
 \end{figure}
 
 \section{Ruchy fugoidalne}
 Do obliczeń wybrałem prędkość $V = 44.5 ms^{-1}$, oraz zakłucenie prędkości $v_0 = 0.5 ms^{-1}$.
 \begin{align*}
-    -\frac{\bar \xi +C_x}{C_z} \pm i \frac{2\bar eta}{C_z} = a \pm i b = -\frac{2*0.3596*0.0647}{0.5091} \pm i \frac{}{}
+    -\frac{2(\bar \xi +C_x)}{C_z} \pm i \frac{2\bar \eta}{C_z} = a \pm i b = -\frac{2*(-0.0485)*0.0647}{0.5091} \pm i \frac{2\cdot 0.3596}{0.5091} \approx 0.1905 \pm i 1.4142
+\end{align*}
+Ubezwymiarowany współczynnik prędkości samolotu:
+\begin{align*}
+    \bar u_o = \frac{v_0}{V_0} = \frac{0.5}{44.5} = 0.0112
 \end{align*}
 
+Ruchy fugoidalne samolotu mają postać:
+\begin{align*}
+    \vartheta_0 (t) = \vartheta_{0} + \vartheta (\bar t) = \frac{\bar u_0}{b} (a^2+b^2) \cdot e^{\bar \xi \frac{t}{\hat t}} \sin(\bar \eta \frac{t}{\hat t} )
+\end{align*}
+\begin{align*}
+    V(t) = V_0 + \bar \bar V(t)\cdot V_0 = V_0 + V_0 \cdot \bar u_0 e^{\bar \xi \frac{t}{\hat t}} \Big( \cos \Big( \bar \eta \frac{t}{\hat t} \Big)   - \frac{a}{b} \sin \Big( \bar \eta \frac{t}{\hat t} \Big) \Big)
+\end{align*}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{imgs/fugo.png}
+    \caption{Ruchy fugoidalne samolotu}
+
+\end{figure}
+
+\section{Wnioski}
+Dla prędkości $V = 44.5 ms^{-1}$ oraz zakłócenia prędkości $v_0 = 0.5 ms^{-1}$, samolot \textbf{wykonał ruchy fugoidalne tłumione} z okresem $T \approx 35s$ i czasem stłumienia $T_{\frac{1}{2}} \approx 100s$. Po 200 sekundach samolot wykonuje ruchy o amplitudzie znikomo małej.  
 
 \end{document}
