@@ -42,11 +42,11 @@ style = verbose
 \setlength{\headheight}{14.49998pt}
 \addtolength{\topmargin}{-2.49998pt}
 
-\title{„Podłużna statyczna stateczność i sterowność samolotu”}
+\title{„Analiza zakrętu samolotu”}
 \author{Marek Polewski}
 \class{Mechanika Lotu 2}
 \instructor{dr inż. Maciej Lasek}
-\projectName{Projekt 10}
+\projectName{Projekt 11}
 \facultyName{Wydział Mechaniczny Energetyki i Lotnictwa Politechniki Warszawskiej - Zakład Mechaniki}
 
 
@@ -56,10 +56,8 @@ style = verbose
 
 \maketitle
 
-\leavevmode\thispagestyle{empty}
 
 
-\tableofcontents
 
 \FloatBarrier
 \setcounter{page}{1}
@@ -70,12 +68,21 @@ style = verbose
     R = \frac{V^2}{g\cdot tg(\phi)} \quad c_z = \frac{2mg}{\rho S V^2} \cdot \frac{1}{cos (\phi)} \quad m_g = \frac{1}{cos(\phi)} \quad N_{n_zark} = \frac{N_n}{(\sqrt{cos(\phi)})^3}
 \end{align*}
 
+Dane wykorzystne do obliczeń:
+\begin{itemize}
+    \item Masa samolotu podczas lotu $m = 650 kg$
+    \item Współczynnik obciążenia $m_g = 2.5$
+    \item Wysokość lotu $h = 0 m.n.p.m$ na które gęstość powietrza $\rho = 1.225 \frac{kg}{m^3}$
+    \item Dopuszczalne przechylenie $\varphi_{max} = \arccos{\frac{1}{m_g}} = \arccos{\frac{1}{2.5}} = 1.159279 \; rad = 66.42^{\circ} $
+\end{itemize}
 \section{Promień zakrętu}
 
 % paste table from R_table.tex file
+
 \begin{table}[H]
     \centering
-    \input{R_table.tex}
+    \resizebox{0.99\width}{!}{\input{czmax_table.tex}}
+    % \input{R_table.tex}
     \caption{Promień zakrętu}
     \label{tab:R}
 \end{table}
@@ -86,6 +93,19 @@ style = verbose
     \caption{Promień zakrętu}
     \label{fig:R}
 \end{figure}
+
+Jak widać na wykresie \ref{fig:R} promień zakrętu jest najmniejszy dla dużych kątów przechylenia. Osiąga on stosunkowo niewielkie wartości, co wskazuje na dobrą manewrowość. Cecha ta jest zazwyzcaj porządana dla samolotu szkolno-treningowego. Dane zaprezentowane na wykresie pochodzą z \cref{tab:Rbig}.
+
+\begin{table}[H]
+    \centering
+    \resizebox{0.9\width}{!}{\input{R_table.tex}}
+    % \input{R_table.tex}
+    \caption{Promień zakrętu}
+    \label{tab:Rbig}
+\end{table}
+
+
+
 
 \section{Współczynnik siły nośnej }
 
@@ -103,14 +123,15 @@ style = verbose
     \label{fig:c_z}
 \end{figure}
 
+
 \section{Moc}
 
-\begin{table}[H]
+\begin{sidewaystable}
     \centering
     \input{Pr_table.tex}
-    \caption{Moc}
-    \label{tab:P}
-\end{table}
+    \caption{Niezbędna moc rozporządzalna do lotu}
+    \label{tab:Pbig}
+\end{sidewaystable}
 
 \begin{figure}[H]
     \centering
@@ -119,8 +140,26 @@ style = verbose
     \label{fig:P}
 \end{figure}
 
+Jak widać na wykresie powyżej, nie wszystkie kąty przechylenia są osiągalne przy danej mocy silnika. W celu polepszenia parametrów zakrętu należy zwiększyć moc silnika. Dane zaprezentowane na wykresie pochodzą z \ref{tab:Pbig}.
+
+\newpage
+\section{Zakręt ze stałym kątem natarcia}
+Do wyznaczenia wartości zakrętu na stałym kącie natarcia został przyjęty  $C_z = 1.53*0.8 = 1.225$.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/mg_plot.png}
+    \caption{Współczynnik obciążenia $m_g$ w zakręcie na stałym kącie natarcia}
+    \label{fig:mg}
+\end{figure}
+Na ostatnim wykresie znajdują się informacje o promieniu zakrętu oraz przechyleniu w zakręcie przy utrzymaniu stałego kąta natarcia. Dodatkowo zaznaczone są ograniczenia wynikające z maksymalnego współczynnika siły nośnej, ciągu silnika, prędkości maksymalnej i minimalnej, a także z maksymalnego współczynnika obciążenia.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/phi_r_plot.png}
+    \caption{Zakręt przy stałym kącie natarcia}
+    \label{fig:N}
+\end{figure}
 
 
-\printbibliography
 
 \end{document}
