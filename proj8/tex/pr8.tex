@@ -1,0 +1,337 @@
+\documentclass[a4paper, twoside]{report}
+
+\usepackage{color}
+\usepackage{tabularray}
+\usepackage{tikz}
+\usepackage{polski}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{multicol}
+\usepackage{lipsum}
+\usepackage[normalem]{ulem}
+\usepackage{multirow}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage{placeins}%pakiet do kontroli umieszczania obiektow
+% \usepackage[a4paper, left=1.5in, right=1in, top=3cm, bottom=2cm]{geometry}
+\usepackage[inner=3cm,outer=2cm, top = 3cm, bottom = 3cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{appendix}
+\usepackage{rotating}
+\usepackage{fourier}
+\usepackage{amsmath}
+\usepackage{mathtools}% Loads amsmath
+\usepackage[T1]{fontenc}
+\usepackage{tabularray}
+\usepackage{subfig}
+\usepackage{color}
+\usepackage{tabularray}
+
+\usepackage{array, caption, floatrow, tabularx, makecell, booktabs}%
+\captionsetup{labelfont = sc}
+\setcellgapes{3pt}
+
+\usepackage[toc,page]{appendix}
+\usetikzlibrary{calc}
+
+
+\newcommand*\cleartoleftpage{%
+  \clearpage
+  \ifodd\value{page}\hbox{}\newpage\fi
+}
+
+\usepackage{afterpage}
+
+\newcommand\blankpage{%
+    \null
+    \thispagestyle{empty}%
+    \addtocounter{page}{-1}%
+    \newpage}
+ 
+\title{Projekt 1}
+\author{Marek Polewski}
+\date{February 2023}
+
+\renewcommand\figurename{Rys.}%skrocony podpis
+\renewcommand\tablename{Tab.}
+
+
+
+
+\begin{document}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhf[EHC]{Wydział Mechaniczny Energetyki i Lotnictwa Politechniki Warszawskiej - Zakład Mechaniki}
+\fancyhf[OHC]{Marek Polewski - Cessna 150M, Moment podłużny samolotu}
+\fancyfoot[LE,RO]{\thepage}
+
+
+\begin{titlepage}
+
+\begin{tikzpicture}[remember picture, overlay]
+  \draw[line width = 1pt] ($(current page.north west) + (1in,-0.5in)$) rectangle ($(current page.south east) + (-0.5in,0.5in)$);
+\end{tikzpicture}
+
+\begin{center}
+
+% Upper part of the page
+\begin{flushright}
+    \textsc{\Large Marek Polewski}\\ [0.1cm]
+    \textsc{\Large Cessna 150m }\\[0.1cm]
+    \textsc{\Large Prowadzący: Maciej Lasek}\\[0.1cm]
+    \textsc{\Large Grupa: ML6}\\[0.1cm]
+
+\end{flushright}
+
+\\[5cm]
+
+% Title
+% \HRule \\[0.4cm]
+{ \huge \bfseries Projekt 6}\\[0.4cm]
+{ \huge \bfseries Moment podłużny samolotu}\\[0.4cm]
+
+
+\vfill
+\flushleft
+\textsc{\Large Data oddania projektu} \hfill  \textsc{\Large Ocena: ...............}\\ [0.3cm]
+\textsc{\Large ..........................} 
+
+\end{center}
+\end{titlepage}
+
+\leavevmode\thispagestyle{empty}\newpage
+\tableofcontents
+
+\FloatBarrier
+\setcounter{page}{1}
+
+\renewcommand\thesection{\arabic{section}}
+
+\section{Współczynnik momentu podłużnego płąta nośnego}
+Współczynnik momentu podłużnego płata nośnego względem środka masy wynosi
+\[
+C_{m_p}=C_{m_{SA}}+C_n (\bar{x_c} - \bar{x_{sa}}) - C_t (\bar{z_c} - \bar{z_{sa}})
+\]
+Załóżmy że yżytkowe kąty natarcia na jakich na ogól lata samolot są małe, nie przekraczają $10 \degree$. W takim przypadku $sin (\alpha) \approx \alpha $, $cos(\alpha) \approx 1$ a współczynniki siły normalnej i stycznej wynoszą:
+$$
+C_n \approx C_z \qquad  C_{t} \approx C_x -\alpha \cdot C_z
+$$
+
+Pozwala to na związek
+
+$$
+C_{m_p} = C_{m_{Sa}}+ C_z\cdot \bar{x_S}-(C_x - \alpha \cdot C_z) \bar{z_s} 
+$$
+
+$$
+\bar{x_s} = \bar{x_c} - \bar{x_{sa}} \qquad \bar{z_s} = \bar{z_c} - \bar{z_{sa}}
+$$
+\FloatBarrier
+\begin{table}[h!]
+\centering
+\caption{Dane odczytane z rysunku z  projektu 1}
+\begin{tabular}{|l|l|} 
+\hline
+$C_a [m]$         & $1.5$      \\ 
+\hline
+$\bar x_{sa} [-]$ & $0.239$    \\ 
+\hline
+$\bar z_{sa} [-]$ & $0.009$    \\ 
+\hline
+$\bar x_{c} [-]$  & $0.28$     \\ 
+\hline
+$\bar z_{c} [-]$  & $0.8/1.5$  \\
+\hline
+\end{tabular}
+\end{table}
+
+
+Obliczenia $\bar{x}_{s1}$, $\bar{x}_{s2}$ i $\bar{x}_{s3}$:
+\[
+\bar x_{s1} =	\bar x_{c1} -\bar x_ {sa} = 0.12 - 0.24 = -0.12 
+\]
+\[
+\bar x_{s2} =	\bar x_{c2} -\bar x_ {sa} = 0.25 - 0.24 =  0.01
+\]
+\[
+\bar x_{s3} =	\bar x_{c3} -\bar x_ {sa} = 0.38 - 0.24 = 0.14 
+\]
+
+Położenie środka ciężkości na osi Z określam poprezz zmierzenie odległości od początku układu współrzędnych do osi kadłuba. Zatem:
+
+$$
+z_c = 0.37m \qquad \bar{z_c} =\frac{z_c}{c_a} = \frac{0.37}{1.5} = 0.246
+$$
+
+$$
+\bar{z_s} = \bar{z_c} - \bar{z_{sa}} = 0.01
+$$
+
+Z projektu 2 wiem, że $C_{mSA} = - 0.048$, Przyjmuję, że środek cięzkośći położony jest neutralnie:
+
+$$
+C_{m_p} = -0.048+C_z \cdot 0.041 - (C_x - \alpha \cdot C_z)\cdot 0.01
+$$
+
+\section{Kadłub} 
+
+Cessna 150 ma / nie ma kadłuba opływowego. Stkąd do wyznaczanie współczynnika momentu podłużnego w zakresie niewielkich kątów natarcia wykorzystam zależność liniową:
+
+$$
+C_{mk} = C_{m_{0k}}+ C_z\cdot (-\Delta \overline{x_{SAk}})
+$$
+
+$$
+C_{m_{0k}} = \frac{b_k\cdot c_0^2}{S\cdot c_a} \cdot (-0.025 \cdot \alpha_{zk}+\Delta C_{mk})
+$$
+
+\begin{equation*}
+    b_k = 0.98 [m] \quad c_o = 1.61 [m] \quad \Delta C_{mk} = 0.006 \quad \alpha_{zk} = 1.1 [\deg] \quad S = 15 [m^2]
+\end{equation*}
+
+$$
+C_{m_{0k}} = \frac{0.98\cdot 1.61^2}{15\cdot 1.5} \cdot (-0.025 \cdot 1.9+ 0.006) = -0.00242
+$$
+
+Odczytane $\Delta \overline{x_{SAk}}$ z wykresy (z proj 8) dla  to:
+
+$$
+\frac{c}{l} = \frac{1.61}{3.1} = 0.52 \qquad
+\frac{l}{l_n} = \frac{3.1}{2.04} = 1.51
+$$
+\begin{figure}[h!]
+  \includegraphics[width=0.5\linewidth]{img/Graph.png}
+  \caption{Wykres Momentu wzłużnego}
+  \label{fig:moment}
+\end{figure}
+
+
+
+\begin{equation*}
+-\Delta \overline{x_{SAk}} \cdot \frac{S\cdot c_a}{b_k\cdot c} = 0.36 
+\end{equation*}
+\begin{equation*}
+    -\Delta \overline{x_{SAk}} \cdot \frac{15\cdot 1.5}{0.98\cdot 1.61} = 0.36 
+\end{equation*}
+\begin{equation*}
+    - \Delta \overline{x_{SAk}}  = 0.36 \cdot \frac{1}{14.26} = 0.0252    
+\end{equation*}
+
+
+\newpage
+\section{Wyniki}
+\subsection{Wyznaczanie współczynnika momentu podłużnego samolotu bez usterzenia}
+
+Wychodząc z równania równowagi momentów działających na samolot
+
+\begin{equation*}
+
+C_{m_{sa}} + C_n\cdot (\bar{x_c} - \overline{x}_{SA}) - C_t\cdot(\bar{z}_c - \bar{z}_{SA}) + \sum_j C_m_j + [C_{m_{SAh}} - C_{nh} \cdot (\bar{x}_{SAh} - \bar{x}_c) + C_{th} \cdot (\bar{z}_{SAh} - \bar{z}_c)] \cdot \frac{S_h}{S}\cdot \Big( \frac{V_{h \infty}}{V_{\infty}} \Big)^2  = 0
+    
+\end{equation*}
+
+\textbf{Z uwagi na wskazówki zawarte w intrukcji nie uwględniłem wpływu rozpórek skrzydła oraz podwozia!}
+
+Po redukcji elementów otrzymuje równanie takie, że:
+
+\[
+C_{m_{bu}}= \underbrace{C_{m_{sa}} + C_z\cdot \bar{x}_s -(C_x - \alpha \cdot C_z)\cdot \overline{z_s}}_\text{$C_{mp}$} + \underbrace{C_{m0k}+(-\Delta \overline{x_{sak}})\cdot C_z}_\text{$C_{mk}$}
+\]
+
+$C_{m_{bu}}$ - współczynnika momentu podłużnego samolotu bez usterzenia
+
+Przykładowe obliczenia dla $\bar{x}_{s1} = -0.12$ oraz $\bar{z}_s = -0.24$ oraz $\alpha = 1 ^\circ$:
+
+\[
+C_{m_{bu1}} = \underbrace{-0.048 + 0.345\cdot (-0.12) - (0.012 - 0.017 \cdot 0.271)\cdot (-0.24)}_\text{$C_{mp1}$} + \underbrace{(-0.0024) + (-0.0252)\cdot 0.271}_\text{$C_{mk}$} =
+\]
+\[
+= 0.006+(-0.089) = 0.007
+\]
+
+\[
+\kappa_h
+
+\]
+
+
+
+
+
+
+% \FloatBarrier
+% \begin{figure}[h!]
+%   \includegraphics[width=\linewidth]{img/Cmbu.jpg}
+%   \caption{Wykres Momentu wzłużnego}
+%   \label{fig:moment}
+% \end{figure}
+
+
+
+% \usepackage{color}
+% \usepackage{tabularray}
+\definecolor{Gallery}{rgb}{0.937,0.937,0.937}
+\definecolor{Highlight}{rgb}{204.0, 255.0, 153.0}
+\begin{table}[h!]
+\centering
+\begin{tblr}{
+  row{1} = {Gallery},
+  row{15} = {Highlight},
+  hlines,
+  vlines,
+}
+$\alpha [^{\circ}]$ & $c_z$ & $c'_{x_p}$ & $a_p [^{\circ}]$ & $C_{mk}$ & $C_{mp1}$   & $C_{mp2}$   & $C_{mp3}$   & $C_{mbu1}$  & $C_{mbu2}$  & $C_{mbu3}$  \\
+
+-13.5 & -1.062 & 0.076  & -16.507    & -0.029 & 0.024  & -0.114 & -0.252 & -0.005 & -0.143 & -0.281 \\
+-12.0 & -0.983 & 0.064  & -14.766    & -0.027 & 0.024  & -0.104 & -0.232 & -0.003 & -0.131 & -0.259 \\
+-10.7 & -0.859 & 0.050  & -13.198    & -0.024 & 0.019  & -0.092 & -0.204 & -0.005 & -0.116 & -0.228 \\
+-9.4  & -0.734 & 0.037  & -11.439    & -0.021 & 0.013  & -0.082 & -0.177 & -0.007 & -0.103 & -0.198 \\
+-8.7  & -0.661 & 0.032  & -10.554    & -0.019 & 0.009  & -0.077 & -0.163 & -0.010 & -0.096 & -0.182 \\
+-8.0  & -0.576 & 0.027  & -9.667     & -0.017 & 0.004  & -0.071 & -0.146 & -0.013 & -0.088 & -0.163 \\
+-7.3  & -0.520 & 0.023  & -8.779     & -0.016 & 0.000  & -0.067 & -0.135 & -0.015 & -0.083 & -0.150 \\
+-6.6  & -0.458 & 0.019  & -7.891     & -0.014 & -0.004 & -0.064 & -0.123 & -0.018 & -0.077 & -0.137 \\
+-5.3  & -0.294 & 0.012  & -6.117     & -0.010 & -0.018 & -0.056 & -0.094 & -0.027 & -0.066 & -0.104 \\
+-4.3  & -0.209 & 0.010  & -4.942     & -0.008 & -0.025 & -0.052 & -0.079 & -0.033 & -0.060 & -0.087 \\
+-3.4  & -0.124 & 0.008  & -3.776     & -0.006 & -0.033 & -0.049 & -0.066 & -0.039 & -0.055 & -0.071 \\
+-2.1  & 0.006  & 0.007  & -2.033     & -0.002 & -0.047 & -0.046 & -0.046 & -0.049 & -0.049 & -0.048 \\
+-1.4  & 0.073  & 0.007  & -1.158     & -0.001 & -0.055 & -0.045 & -0.036 & -0.055 & -0.046 & -0.036 \\
+-0.5  & 0.153  & 0.008  & 0.018      & 0.001  & -0.064 & -0.044 & -0.025 & -0.063 & -0.043 & -0.023 \\
+0.3   & 0.271  & 0.010  & 1.057      & 0.004  & -0.079 & -0.044 & -0.009 & -0.075 & -0.040 & -0.004 \\
+1.0   & 0.345  & 0.012  & 1.950      & 0.006  & -0.089 & -0.044 & 0.001  & -0.083 & -0.038 & 0.007  \\
+2.1   & 0.407  & 0.016  & 3.287      & 0.008  & -0.098 & -0.045 & 0.008  & -0.090 & -0.037 & 0.015  \\
+2.9   & 0.497  & 0.020  & 4.316      & 0.010  & -0.111 & -0.047 & 0.018  & -0.101 & -0.037 & 0.028  \\
+3.4   & 0.599  & 0.023  & 5.044      & 0.013  & -0.126 & -0.048 & 0.029  & -0.114 & -0.036 & 0.042  \\
+4.8   & 0.689  & 0.032  & 6.778      & 0.015  & -0.142 & -0.052 & 0.037  & -0.127 & -0.037 & 0.052  \\
+5.9   & 0.802  & 0.041  & 8.233      & 0.018  & -0.161 & -0.057 & 0.048  & -0.143 & -0.039 & 0.065  \\
+6.6   & 0.893  & 0.048  & 9.120      & 0.020  & -0.177 & -0.061 & 0.056  & -0.156 & -0.040 & 0.076  \\
+8.0   & 1.028  & 0.064  & 10.922     & 0.023  & -0.202 & -0.068 & 0.066  & -0.178 & -0.044 & 0.089  \\
+9.1   & 1.153  & 0.080  & 12.417     & 0.027  & -0.225 & -0.076 & 0.074  & -0.199 & -0.049 & 0.101  \\
+10.2  & 1.232  & 0.093  & 13.725     & 0.029  & -0.242 & -0.082 & 0.078  & -0.214 & -0.054 & 0.106  \\
+10.7  & 1.328  & 0.100  & 14.434     & 0.031  & -0.262 & -0.089 & 0.084  & -0.231 & -0.058 & 0.115  \\
+11.9  & 1.401  & 0.115  & 15.836     & 0.033  & -0.279 & -0.097 & 0.085  & -0.246 & -0.064 & 0.118  \\
+12.7  & 1.452  & 0.127  & 16.822     & 0.034  & -0.292 & -0.103 & 0.086  & -0.257 & -0.069 & 0.120  \\
+13.7  & 1.525  & 0.145  & 18.087     & 0.036  & -0.309 & -0.111 & 0.087  & -0.273 & -0.075 & 0.123  \\
+14.4  & 1.599  & 0.154  & 18.888     & 0.038  & -0.327 & -0.119 & 0.089  & -0.289 & -0.081 & 0.127  \\
+15.3  & 1.588  & 0.155  & 19.815     & 0.038  & -0.330 & -0.124 & 0.082  & -0.293 & -0.086 & 0.120  \\
+
+\end{tblr}
+\end{table}
+
+
+\begin{thebibliography}
+
+\bibitem{}Przewodnik  po zadaniach domowych z mechaniki lotu - Charakterystyki zasięgu i długotrwałości lotu
+
+\bibitem{POH}\href{}{https://www.cpaviation.com/images/downloads/CESSNA150POH.pdf}
+
+\bibitem[Charakterystyki silnika O-200D]{silnik}\href{}{https://www.manualslib.com/manual/1476191/Continental-Motors-O-200-D.html?page=52#manual}
+
+\bibitem{horizontal} Współczynnik na podstawie \href{}{}
+
+\bibitem[General Aivation Aircraft]{General Aivation Aircraft}Na podstawie przykładu ze strony 722 General Aviation Aircraft
+
+
+\end{thebibliography}
+
+
+\end{document}
